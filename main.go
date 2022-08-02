@@ -12,7 +12,8 @@ import (
 
 func main() {
 
-	//===============Connection-Database=================//
+	//===============Connection-Database===============//
+
 	dsn := "root:@tcp(127.0.0.1:3306)/dbstartup?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
@@ -20,13 +21,18 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	//==================User-Register====================//
+	//==============User-Register-Login===============//
+
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
 	userHandler := handler.NewUserHandler(userService)
+
+	//=============Router-And-List-API================//
+
 	router := gin.Default()
 	api := router.Group("/api/v1")
 	api.POST("/users", userHandler.RegisterUser)
+	api.POST("/sessions", userHandler.Login)
 
 	router.Run(":8080")
 }
