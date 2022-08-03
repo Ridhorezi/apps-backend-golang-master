@@ -21,7 +21,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	//==============User-Register-Login===============//
+	//================User-Endpoint==================//
 
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
@@ -30,10 +30,12 @@ func main() {
 	//=============Router-And-List-API================//
 
 	router := gin.Default()
+
 	api := router.Group("/api/v1")
 	api.POST("/users", userHandler.RegisterUser)
 	api.POST("/sessions", userHandler.Login)
 	api.POST("/email_checkers", userHandler.CheckEmailAvailability)
+	api.POST("/avatars", userHandler.UploadAvatar)
 
 	router.Run(":8080")
 }
