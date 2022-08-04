@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"startup-backend-api/auth"
 	"startup-backend-api/handler"
@@ -27,6 +28,24 @@ func main() {
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
 	authService := auth.NewService()
+	token, err := authService.ValidateToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.9njU5wOeHW1HCFnZsrSbfaWcHQI6Iei36ZrxQSyiXiA")
+
+	if err != nil {
+		fmt.Println("ERROR")
+		fmt.Println("ERROR")
+		fmt.Println("ERROR")
+	}
+
+	if token.Valid {
+		fmt.Println("Valid")
+		fmt.Println("Valid")
+		fmt.Println("Valid")
+	} else {
+		fmt.Println("Invalid")
+		fmt.Println("Invalid")
+		fmt.Println("Invalid")
+	}
+
 	userHandler := handler.NewUserHandler(userService, authService)
 
 	//=============Router-And-List-API===============//
