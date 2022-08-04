@@ -6,7 +6,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-//=============Contract-Service===============//
+//===================Contract-User====================//
 
 type Service interface {
 	RegisterUser(RegisterUserInput) (User, error)
@@ -15,15 +15,18 @@ type Service interface {
 	SaveAvatar(ID int, fileLocation string) (User, error)
 }
 
+//===================Struct-Call=====================//
 type service struct {
 	repository Repository
 }
+
+//===============Pointer-To-Service==================//
 
 func NewService(repository Repository) *service {
 	return &service{repository}
 }
 
-//==================Service-Register====================//
+//==================Service-Register=================//
 
 func (s *service) RegisterUser(input RegisterUserInput) (User, error) {
 
@@ -48,7 +51,7 @@ func (s *service) RegisterUser(input RegisterUserInput) (User, error) {
 	return newUser, nil
 }
 
-//==================Service-Login====================//
+//====================Func-Login======================//
 func (s *service) Login(input LoginInput) (User, error) {
 
 	email := input.Email
@@ -74,7 +77,7 @@ func (s *service) Login(input LoginInput) (User, error) {
 
 }
 
-//=============Service-Validation-Email===============//
+//===============Func-Validation-or-IsEmailAvailable=================//
 
 func (s *service) IsEmailAvailable(input CheckEmailInput) (bool, error) {
 
@@ -93,7 +96,7 @@ func (s *service) IsEmailAvailable(input CheckEmailInput) (bool, error) {
 
 }
 
-//=============Service-Avatar-User================//
+//================Func-SaveAvatar===================//
 
 func (s *service) SaveAvatar(ID int, fileLocation string) (User, error) {
 
