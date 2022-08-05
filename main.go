@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"startup-backend-api/auth"
+	"startup-backend-api/campaign"
 	"startup-backend-api/handler"
 	"startup-backend-api/images/helper"
 	"startup-backend-api/user"
@@ -32,25 +33,31 @@ func main() {
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
 	authService := auth.NewService()
+	userHandler := handler.NewUserHandler(userService, authService)
 	token, err := authService.ValidateToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.9njU5wOeHW1HCFnZsrSbfaWcHQI6Iei36ZrxQSyiXiA")
 
 	if err != nil {
-		fmt.Println("ERROR")
-		fmt.Println("ERROR")
 		fmt.Println("ERROR")
 	}
 
 	if token.Valid {
 		fmt.Println("Valid")
-		fmt.Println("Valid")
-		fmt.Println("Valid")
 	} else {
-		fmt.Println("Invalid")
-		fmt.Println("Invalid")
 		fmt.Println("Invalid")
 	}
 
-	userHandler := handler.NewUserHandler(userService, authService)
+	//================Campaign-Endpoint==================//
+
+	campaignRepository := campaign.NewRepository(db)
+	campaigns, err := campaignRepository.FindByUserID(1)
+	fmt.Println("debug")
+	fmt.Println(len(campaigns))
+	for _, campaign := range campaigns {
+		fmt.Println(campaign.Name)
+		if len(campaign.CampaignImages) > 0 {
+			fmt.Println(campaign.CampaignImages[0].FileName)
+		}
+	}
 
 	//=============Router-And-List-API===============//
 
