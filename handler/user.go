@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"net/http"
 	"startup-backend-api/auth"
-	"startup-backend-api/helper"
+	"startup-backend-api/images/helper"
+
+	// "startup-backend-api/helper"
 	"startup-backend-api/user"
 
 	"github.com/gin-gonic/gin"
@@ -167,7 +169,9 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 
 	}
 
-	userID := 1
+	currentUser := c.MustGet("currentUser").(user.User)
+
+	userID := currentUser.ID
 
 	path := fmt.Sprintf("images/%d-%s", userID, file.Filename)
 
