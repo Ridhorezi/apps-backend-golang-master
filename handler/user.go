@@ -6,7 +6,6 @@ import (
 	"startup-backend-api/auth"
 	"startup-backend-api/images/helper"
 
-	// "startup-backend-api/helper"
 	"startup-backend-api/user"
 
 	"github.com/gin-gonic/gin"
