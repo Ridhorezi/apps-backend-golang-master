@@ -1,6 +1,9 @@
 package campaign
 
-import "time"
+import (
+	"startup-backend-api/user"
+	"time"
+)
 
 //==================From-Table-Campaigns-&-Campaign-Images===================//
 
@@ -18,6 +21,7 @@ type Campaign struct {
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 	CampaignImages   []CampaignImage // relation to CampaignImage
+	User             user.User       // relation to User
 }
 
 type CampaignImage struct {
