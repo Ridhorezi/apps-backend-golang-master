@@ -1,8 +1,0 @@
-Catatan 
-Alur dari framewor gin gonic
-Metode layering
-1. main.go sebagai penghubung database dengan program, pendaftaran mapping, dan router dari setiap proses yang terjadi dalam aplikasi.
-2. handler dapat di ibaratkan sebagai controller yang memproses mapping input dari user menuju struct input.
-3. service melakukan mapping dari struct input menuju struct User(entity),
-4. repository penghubung sekaligus logic pengolahan data menuju database.
-5. database tempat penyimpanan data.
