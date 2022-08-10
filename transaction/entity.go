@@ -1,7 +1,11 @@
 package transaction
 
-import "time"
+import (
+	"startup-backend-api/user"
+	"time"
+)
 
+//==================From-Table-Transaction-Campaign-User===================//
 type Transaction struct {
 	ID         int
 	CampaignID int
@@ -11,4 +15,5 @@ type Transaction struct {
 	Code       string
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
+	User       user.User // relationship
 }
