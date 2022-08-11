@@ -1,6 +1,7 @@
 package transaction
 
 import (
+	"startup-backend-api/campaign"
 	"startup-backend-api/user"
 	"time"
 )
@@ -13,7 +14,8 @@ type Transaction struct {
 	Amount     int
 	Status     string
 	Code       string
+	User       user.User         // relationship
+	Campaign   campaign.Campaign //relationship
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
-	User       user.User // relationship
 }
