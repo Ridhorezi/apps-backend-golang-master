@@ -8,6 +8,7 @@ import (
 	"startup-backend-api/campaign"
 	"startup-backend-api/handler"
 	"startup-backend-api/images/helper"
+	"startup-backend-api/payment"
 	"startup-backend-api/transaction"
 	"startup-backend-api/user"
 	"strings"
@@ -51,19 +52,20 @@ func main() {
 		fmt.Println("Invalid")
 	}
 
-	//================Campaign-Endpoint==================//
+	//=================Campaign-Endpoint===================//
 
 	campaignRepository := campaign.NewRepository(db)
 	campaignService := campaign.NewService(campaignRepository)
 	campaignHandler := handler.NewCampaignHandler(campaignService)
 
-	//================Transaction-Endpoint==================//
+	//================Transaction-Endpoint=================//
 
 	transactionRepository := transaction.NewRepository(db)
-	transactionService := transaction.NewService(transactionRepository, campaignRepository)
+	paymentService := payment.NewService()
+	transactionService := transaction.NewService(transactionRepository, campaignRepository, paymentService)
 	transactionHandler := handler.NewTransactionHandler(transactionService)
 
-	//===============Router-And-List-API=================//
+	//=================Router-And-List-API=================//
 
 	router := gin.Default()
 
@@ -90,6 +92,7 @@ func main() {
 
 	api.GET("/campaigns/:id/transactions", authMiddleware(authService, userService), transactionHandler.GetCampaignTransactions)
 	api.GET("/transactions", authMiddleware(authService, userService), transactionHandler.GetUserTransactions)
+	api.POST("/transactions", authMiddleware(authService, userService), transactionHandler.CreateTransaction)
 
 	//=========Run-Port-8080==========//
 
