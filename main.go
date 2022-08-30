@@ -87,9 +87,17 @@ func main() {
 	}))
 
 	// router.LoadHTMLGlob("web/templates/**/*")
+
 	router.HTMLRender = loadTemplates("./web/templates") // router for web cms
 
+	//========Load-Static-Folder=======//
+
 	router.Static("/images", "./images")
+	router.Static("/css", "./web/assets/css")
+	router.Static("/extensions", "./web/assets/extensions")
+	router.Static("/fonts", "./web/assets/fonts")
+	router.Static("/image", "./web/assets/image")
+	router.Static("/js", "./web/assets/js")
 
 	api := router.Group("/api/v1")
 
