@@ -5,12 +5,13 @@ go 1.18
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-contrib/cors v1.4.0
+	github.com/gin-contrib/multitemplate v0.0.0-20220829131020-8c2a8441bc2b
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-playground/validator/v10 v10.11.0
 	github.com/gosimple/slug v1.12.0
 	github.com/veritrans/go-midtrans v0.0.0-20210616100512-16326c5eeb00
-	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa
-	gorm.io/driver/mysql v1.3.5
+	golang.org/x/crypto v0.0.0-20220826181053-bd7e27e6170d
+	gorm.io/driver/mysql v1.3.6
 	gorm.io/gorm v1.23.8
 )
 

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"path/filepath"
 	"startup-backend-api/auth"
 	"startup-backend-api/campaign"
 	"startup-backend-api/handler"
@@ -13,8 +14,11 @@ import (
 	"startup-backend-api/user"
 	"strings"
 
+	webHandler "startup-backend-api/web/handler"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/multitemplate"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -66,11 +70,24 @@ func main() {
 	transactionService := transaction.NewService(transactionRepository, campaignRepository, paymentService)
 	transactionHandler := handler.NewTransactionHandler(transactionService)
 
+	//===================User-Web-Handler==================//
+
+	userWebHandler := webHandler.NewUserHandler()
+
 	//=================Router-And-List-API=================//
 
 	router := gin.Default()
 
-	router.Use(cors.Default())
+	// router.Use(cors.Default())
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"http://localhost:3000"},
+		AllowMethods: []string{"GET", "PATCH", "POST", "DELETE", "PUT", "OPTIONS", "HEAD"},
+		AllowHeaders: []string{"Authorization", "Content-Type"},
+	}))
+
+	// router.LoadHTMLGlob("web/templates/**/*")
+	router.HTMLRender = loadTemplates("./web/templates") // router for web cms
 
 	router.Static("/images", "./images")
 
@@ -98,6 +115,10 @@ func main() {
 	api.GET("/transactions", authMiddleware(authService, userService), transactionHandler.GetUserTransactions)
 	api.POST("/transactions", authMiddleware(authService, userService), transactionHandler.CreateTransaction)
 	api.POST("/transactions/notification", transactionHandler.GetNotification)
+
+	//============User-Web============//
+
+	router.GET("/users/", userWebHandler.Index)
 
 	//=========Run-Port-8080==========//
 
@@ -155,4 +176,29 @@ func authMiddleware(authService auth.Service, userService user.Service) gin.Hand
 
 	}
 
+}
+
+//===================Load-Template-Html=================//
+
+func loadTemplates(templatesDir string) multitemplate.Renderer {
+	r := multitemplate.NewRenderer()
+
+	layouts, err := filepath.Glob(templatesDir + "/layouts/*")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	includes, err := filepath.Glob(templatesDir + "/**/*")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	// Generate our templates map from our layouts/ and includes/ directories
+	for _, include := range includes {
+		layoutCopy := make([]string, len(layouts))
+		copy(layoutCopy, layouts)
+		files := append(layoutCopy, include)
+		r.AddFromFiles(filepath.Base(include), files...)
+	}
+	return r
 }
