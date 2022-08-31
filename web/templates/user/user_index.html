@@ -30,6 +30,7 @@
       <table class="table table-striped" id="table1">
         <thead>
           <tr>
+            <th>Avatar</th>
             <th>Name</th>
             <th>Email</th>
             <th>Occupattion</th>
@@ -39,6 +40,9 @@
         <tbody>
           {{ range .users }}
           <tr>
+            <td>
+              <img class="img-fluid img-thumbnail" src="/{{ .AvatarFileName}}" style="width: 60px;">
+            </td>
             <td>{{ .Name }}</td>
             <td>{{ .Email }}</td>
             <td>{{ .Occupation }}</td>
