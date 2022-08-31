@@ -28,6 +28,14 @@
   <div class="card">
     <div class="card-body">
       <table class="table table-striped" id="table1">
+        <a
+          href="/users/add/"
+          class="btn icon icon-left btn-primary"
+          style="margin-bottom: 15px;"
+        >
+          <i class="bi bi-plus-lg"></i>
+          Add User
+        </a>
         <thead>
           <tr>
             <th>Avatar</th>
@@ -41,7 +49,11 @@
           {{ range .users }}
           <tr>
             <td>
-              <img class="img-fluid img-thumbnail" src="/{{ .AvatarFileName}}" style="width: 60px;">
+              <img
+                class="img-fluid img-thumbnail"
+                src="/{{ .AvatarFileName}}"
+                style="width: 60px;"
+              />
             </td>
             <td>{{ .Name }}</td>
             <td>{{ .Email }}</td>

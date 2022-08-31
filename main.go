@@ -125,10 +125,14 @@ func main() {
 	api.POST("/transactions", authMiddleware(authService, userService), transactionHandler.CreateTransaction)
 	api.POST("/transactions/notification", transactionHandler.GetNotification)
 
-	//============User-Web============//
+	//=======Router-Web-Dashboard======//
 
 	router.GET("/", dashboardWebHandler.Index)
+
+	//============User-Web============//
+
 	router.GET("/users/", userWebHandler.Index)
+	router.GET("/users/add/", userWebHandler.Add)
 
 	//=========Run-Port-8080==========//
 

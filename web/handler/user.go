@@ -27,3 +27,9 @@ func (h *userHandler) Index(c *gin.Context) {
 	c.HTML(http.StatusOK, "user_index.html", gin.H{"users": users})
 
 }
+
+func (h *userHandler) Add(c *gin.Context) {
+
+	c.HTML(http.StatusOK, "user_add.html", nil)
+
+}
