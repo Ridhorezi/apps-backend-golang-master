@@ -73,7 +73,7 @@ func main() {
 	//===================User-Web-Handler==================//
 
 	dashboardWebHandler := webHandler.NewDashboardHandler()
-	userWebHandler := webHandler.NewUserHandler()
+	userWebHandler := webHandler.NewUserHandler(userService)
 
 	//=================Router-And-List-API=================//
 

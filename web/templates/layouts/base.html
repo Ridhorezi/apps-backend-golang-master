@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" href="/css/main/app.css" />
     <link rel="stylesheet" href="/css/main/app-dark.css" />
+    <link rel="stylesheet" href="/extensions/simple-datatables/style.css" />
+    <link rel="stylesheet" href="/css/pages/simple-datatables.css" />
     <link
       rel="shortcut icon"
       href="/image/logo/favicon.svg"
@@ -155,6 +157,7 @@
           </div>
         </div>
       </div>
+
       <div id="main">
         <header class="mb-3">
           <a href="#" class="burger-btn d-block d-xl-none">
@@ -165,29 +168,11 @@
         <div class="page-content">
           {{ template "content" .}}
         </div>
-
-        <!-- <footer>
-          <div class="footer clearfix mb-0 text-muted">
-            <div class="float-start">
-              <p>2022 &copy; r-developers</p>
-            </div>
-            <div class="float-end">
-              <p>
-                Crafted with
-                <span class="text-danger"><i class="bi bi-heart"></i></span>
-                by
-                <a href="https://github.com">Ridho Suhaebi Arrowi</a>
-              </p>
-            </div>
-          </div>
-        </footer> -->
       </div>
     </div>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/app.js"></script>
-
-    <!-- Need: Apexcharts -->
-    <!-- <script src="/extensions/apexcharts/apexcharts.min.js"></script> 
-    <script src="/js/pages/dashboard.js"></script> -->
+    <script src="/extensions/simple-datatables/umd/simple-datatables.js"></script>
+    <script src="/js/pages/simple-datatables.js"></script>
   </body>
 </html>
