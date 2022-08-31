@@ -33,3 +33,32 @@ func (h *userHandler) Add(c *gin.Context) {
 	c.HTML(http.StatusOK, "user_add.html", nil)
 
 }
+
+func (h *userHandler) Create(c *gin.Context) {
+
+	var input user.FormCreateUsersInput
+
+	err := c.ShouldBind(&input)
+
+	if err != nil {
+		input.Error = err
+		c.HTML(http.StatusOK, "user_add.html", input)
+		return
+	}
+
+	registerInput := user.RegisterUserInput{}
+	registerInput.Name = input.Name
+	registerInput.Email = input.Email
+	registerInput.Occupation = input.Occupation
+	registerInput.Password = input.Password
+
+	_, err = h.userService.RegisterUser(registerInput)
+
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", nil)
+		return
+	}
+
+	c.Redirect(http.StatusFound, "/users")
+
+}

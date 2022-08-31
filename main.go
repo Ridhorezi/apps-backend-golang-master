@@ -133,6 +133,7 @@ func main() {
 
 	router.GET("/users/", userWebHandler.Index)
 	router.GET("/users/add/", userWebHandler.Add)
+	router.POST("/users/", userWebHandler.Create)
 
 	//=========Run-Port-8080==========//
 
