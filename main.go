@@ -45,7 +45,7 @@ func main() {
 
 	//==============Jwt-Token-Validasi=================//
 
-	token, err := authService.ValidateToken("")
+	token, err := authService.ValidateToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.9njU5wOeHW1HCFnZsrSbfaWcHQI6Iei36ZrxQSyiXiA")
 
 	if err != nil {
 		fmt.Println("ERROR")
@@ -72,6 +72,7 @@ func main() {
 
 	//===================User-Web-Handler==================//
 
+	dashboardWebHandler := webHandler.NewDashboardHandler()
 	userWebHandler := webHandler.NewUserHandler()
 
 	//=================Router-And-List-API=================//
@@ -126,6 +127,7 @@ func main() {
 
 	//============User-Web============//
 
+	router.GET("/", dashboardWebHandler.Index)
 	router.GET("/users/", userWebHandler.Index)
 
 	//=========Run-Port-8080==========//
