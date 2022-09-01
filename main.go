@@ -74,6 +74,7 @@ func main() {
 
 	dashboardWebHandler := webHandler.NewDashboardHandler()
 	userWebHandler := webHandler.NewUserHandler(userService)
+	campaignWebHandler := webHandler.NewCampaignHandler(campaignService)
 
 	//=================Router-And-List-API=================//
 
@@ -136,6 +137,12 @@ func main() {
 	router.POST("/users/", userWebHandler.Create)
 	router.GET("/users/edit/:id", userWebHandler.Edit)
 	router.POST("/users/update/:id", userWebHandler.Update)
+	router.GET("/users/avatar/:id", userWebHandler.NewAvatar)
+	router.POST("/users/avatar/:id", userWebHandler.CreateAvatar)
+
+	//==========Campaign-Web==========//
+
+	router.GET("/campaigns/", campaignWebHandler.Index)
 
 	//=========Run-Port-8080==========//
 

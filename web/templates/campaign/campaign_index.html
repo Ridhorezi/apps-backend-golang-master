@@ -4,9 +4,9 @@
   <div class="page-title">
     <div class="row">
       <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>Users</h3>
+        <h3>Campaign</h3>
         <p class="text-subtitle text-muted">
-          List of Users
+          List of Campaign
         </p>
       </div>
       <div class="col-12 col-md-6 order-md-2 order-first">
@@ -16,7 +16,7 @@
         >
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Users</li>
+            <li class="breadcrumb-item active" aria-current="page">Campaign</li>
           </ol>
         </nav>
       </div>
@@ -29,38 +29,37 @@
     <div class="card-body">
       <table class="table table-striped" id="table1">
         <a
-          href="/users/add/"
+          href="/campaigns/add/"
           class="btn icon icon-left btn-primary"
           style="margin-bottom: 15px;"
         >
           <i class="bi bi-plus-lg"></i>
-          Add User
+          Add Campaign
         </a>
         <thead>
           <tr>
-            <th>Avatar</th>
+            <th>Image</th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Occupattion</th>
+            <th>Short Description</th>
+            <th>Goal Amount</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {{ range .users }}
+          {{ range .campaigns }}
           <tr>
             <td>
-              <img
-                class="img-fluid img-thumbnail"
-                src="/{{ .AvatarFileName}}"
-                style="width: 60px;"
-              />
+             {{ if .CampaignImages }}
+                <img width="60" src="/{{ (index .CampaignImages 0).FileName }}" class="img-fluid img-thumbnail">
+             {{ end }}
             </td>
             <td>{{ .Name }}</td>
-            <td>{{ .Email }}</td>
-            <td>{{ .Occupation }}</td>
+            <td>{{ .ShortDescription }}</td>
+            <td>{{ .GoalAmount }}</td>
             <td>
-              <a href="/users/edit/{{ .ID }}" class="btn icon btn-warning"><i class="bi bi-pencil-fill"></i></a>
-              <a href="/users/avatar/{{ .ID }}" style="background-color:#A66CFF;" class="btn icon"><i class="bi bi-camera-fill" style="color:white;"></i></a>
+              <a href="/campaigns/show/{{ .ID }}" class="btn icon btn-primary"><i class="bi bi-search"></i></a>
+              <a href="/campaigns/edit/{{ .ID }}" class="btn icon btn-warning"><i class="bi bi-pencil-fill"></i></a>
+              <a href="/campaigns/image/{{ .ID }}" style="background-color:#A66CFF;" class="btn icon"><i class="bi bi-camera-fill" style="color:white;"></i></a>
               <a href="#" class="btn icon btn-danger"><i class="bi bi-trash-fill"></i></a>
             </td>
           </tr>

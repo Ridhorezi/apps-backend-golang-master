@@ -1,0 +1,58 @@
+{{define "content"}}
+
+<div class="page-heading">
+  <div class="page-title">
+    <div class="row">
+      <div class="col-12 col-md-6 order-md-1 order-last">
+        <h3>Upload Avatar</h3>
+      </div>
+      <div class="col-12 col-md-6 order-md-2 order-first">
+        <nav
+          aria-label="breadcrumb"
+          class="breadcrumb-header float-start float-lg-end"
+        >
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/users">Users</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Upload Avatar
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="basic-horizontal-layouts">
+  <div class="row match-height">
+    <div class="col-md-12 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <form
+              action="/users/avatar/{{ .ID }}"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="form-group">
+                <input
+                  type="file"
+                  name="avatar"
+                  required
+                  class="form-control"
+                />
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{end}}
