@@ -134,6 +134,8 @@ func main() {
 	router.GET("/users/", userWebHandler.Index)
 	router.GET("/users/add/", userWebHandler.Add)
 	router.POST("/users/", userWebHandler.Create)
+	router.GET("/users/edit/:id", userWebHandler.Edit)
+	router.POST("/users/update/:id", userWebHandler.Update)
 
 	//=========Run-Port-8080==========//
 

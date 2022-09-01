@@ -42,7 +42,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Occupattion</th>
-            <th>Status</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -59,7 +59,10 @@
             <td>{{ .Email }}</td>
             <td>{{ .Occupation }}</td>
             <td>
-              <span class="badge bg-success">Active</span>
+              <!-- <span class="badge bg-success">Update</span> -->
+              <a href="/users/edit/{{ .ID }}" class="btn icon btn-warning"><i class="bi bi-pencil-fill"></i></a>
+              <a href="#" class="btn icon btn-primary"><i class="bi bi-camera-fill"></i></a>
+              <a href="#" class="btn icon btn-danger"><i class="bi bi-trash-fill"></i></a>
             </td>
           </tr>
           {{ end }}

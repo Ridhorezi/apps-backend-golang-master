@@ -8,7 +8,7 @@
   <div class="page-title">
     <div class="row">
       <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>Add Users</h3>
+        <h3>Edit Users</h3>
       </div>
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav
@@ -18,7 +18,7 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
             <li class="breadcrumb-item"><a href="/users">Users</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
           </ol>
         </nav>
       </div>
@@ -32,7 +32,11 @@
       <div class="card">
         <div class="card-content">
           <div class="card-body">
-            <form action="/users/" method="POST" class="form form-horizontal">
+            <form
+              action="/users/update/{{ .ID }}"
+              method="POST"
+              class="form form-horizontal"
+            >
               <div class="form-body">
                 <div class="row">
                   <div class="col-md-4">
@@ -94,25 +98,6 @@
                         />
                         <div class="form-control-icon">
                           <i class="bi bi-person-workspace"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <label>Password</label>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="form-group has-icon-left">
-                      <div class="position-relative">
-                        <input
-                          type="password"
-                          class="form-control"
-                          name="password"
-                          required
-                          placeholder="Password"
-                        />
-                        <div class="form-control-icon">
-                          <i class="bi bi-lock"></i>
                         </div>
                       </div>
                     </div>

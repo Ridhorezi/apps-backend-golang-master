@@ -14,7 +14,8 @@ type Service interface {
 	IsEmailAvailable(input CheckEmailInput) (bool, error)
 	SaveAvatar(ID int, fileLocation string) (User, error)
 	GetUserByID(ID int) (User, error)
-	GetAllUsers() ([]User, error) // for web user cms
+	GetAllUsers() ([]User, error)                         // for web user cms
+	UpdateUsers(input FormUpdateUsersInput) (User, error) // for web user cms
 }
 
 //===================Struct-Call=====================//
@@ -147,5 +148,27 @@ func (s *service) GetAllUsers() ([]User, error) {
 	}
 
 	return users, nil
+
+}
+
+func (s *service) UpdateUsers(input FormUpdateUsersInput) (User, error) {
+
+	users, err := s.repository.FindById(input.ID)
+
+	if err != nil {
+		return users, err
+	}
+
+	users.Name = input.Name
+	users.Email = input.Email
+	users.Occupation = input.Occupation
+
+	updatedUsers, err := s.repository.Update(users)
+
+	if err != nil {
+		return updatedUsers, err
+	}
+
+	return updatedUsers, nil
 
 }
